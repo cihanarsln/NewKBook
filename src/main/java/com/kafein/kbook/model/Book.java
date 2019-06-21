@@ -3,11 +3,12 @@ package com.kafein.kbook.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Set;
 
 @Data
 @Entity
-public class Book {
+public class Book implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,6 +30,7 @@ public class Book {
     @ManyToOne
     private Author author;
 
+
     @ManyToMany
     @JoinTable(name = "publisher_books",
             joinColumns = @JoinColumn(name = "books_id", referencedColumnName = "id", insertable = false, updatable = false),
@@ -36,5 +38,9 @@ public class Book {
     private Set<Publisher> publishers;
 
     private boolean status;
+
+    @ManyToOne(cascade = {CascadeType.MERGE})
+    @JoinColumn(name="loan_id")
+    private Loan loan;
 
 }

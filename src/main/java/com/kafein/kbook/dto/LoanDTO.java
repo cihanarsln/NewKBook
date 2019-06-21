@@ -1,16 +1,18 @@
 package com.kafein.kbook.dto;
 
-import java.util.Date;
+import lombok.Data;
+
+import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
-public class LoanDTO {
+@Data
+public class LoanDTO implements Serializable {
 
     private int id;
 
-    private Date pickDate;
+    private List<BookDTO> books;
 
-    private Set<BookDTO> books;
-
-    private Set<UserDTO> users;
+    private UserDTO user;
 
 }

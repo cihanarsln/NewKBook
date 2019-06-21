@@ -1,26 +1,25 @@
 package com.kafein.kbook.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.Set;
+import java.io.Serializable;
+import java.util.List;
 
 @Data
 @Entity
-public class Loan {
+public class Loan implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    private Date pickDate;
+    @OneToMany(mappedBy = "loan", fetch = FetchType.LAZY)
+    private List<Book> books;
 
-    @OneToMany
-    private Set<Book> books;
-
-    @OneToMany
-    private Set<User> users;
+    @OneToOne
+    private User user;
 
 }

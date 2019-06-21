@@ -5,7 +5,6 @@ import com.kafein.kbook.model.Loan;
 import com.kafein.kbook.service.base.LoanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import sun.rmi.runtime.Log;
 
 import java.util.List;
 
@@ -24,7 +23,7 @@ public class LoanController {
 
     @PostMapping
     @ResponseBody
-    public Loan save(@RequestBody LoanDTO loanDTO ){
+    public LoanDTO save(@RequestBody LoanDTO loanDTO ){
         return loanService.save(loanDTO);
     }
 

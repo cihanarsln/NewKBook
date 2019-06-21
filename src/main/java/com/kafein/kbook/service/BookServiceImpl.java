@@ -32,6 +32,11 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public BookDTO findById(int id) {
+        return bookMapper.toBookDTO(bookRepository.findById(id));
+    }
+
+    @Override
     public List<BookDTO> findAllByName(String name) {
         return bookMapper.toBookDTOList(bookRepository.findAllByName(name));
     }

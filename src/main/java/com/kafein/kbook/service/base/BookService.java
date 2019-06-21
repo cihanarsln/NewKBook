@@ -2,8 +2,6 @@ package com.kafein.kbook.service.base;
 
 import com.kafein.kbook.dto.BookDTO;
 import com.kafein.kbook.model.Book;
-import com.kafein.kbook.model.BookType;
-import com.kafein.kbook.model.Publisher;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -14,6 +12,8 @@ public interface BookService {
     Book save(BookDTO bookDTO);
 
     List<BookDTO> findAll();
+
+    BookDTO findById(int id);
 
     List<BookDTO> findAllByName(String name);
 

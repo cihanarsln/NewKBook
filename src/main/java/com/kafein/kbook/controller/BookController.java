@@ -33,6 +33,12 @@ public class BookController {
         return bookService.findAllByName(name);
     }
 
+    @PostMapping("/by-id")
+    @ResponseBody
+    public BookDTO getById(@RequestParam("id") int id){
+        return bookService.findById(id);
+    }
+
 
     @PostMapping("/by-author-name")
     @ResponseBody
