@@ -1,11 +1,8 @@
 package com.kafein.kbook.service;
 
-import com.kafein.kbook.model.BookType;
-import com.kafein.kbook.model.Publisher;
 import com.kafein.kbook.service.base.BookService;
 import com.kafein.kbook.dto.BookDTO;
 import com.kafein.kbook.mapper.BookMapper;
-import com.kafein.kbook.model.Book;
 import com.kafein.kbook.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,8 +19,8 @@ public class BookServiceImpl implements BookService {
     private BookMapper bookMapper;
 
     @Override
-    public Book save(BookDTO bookDTO) {
-        return bookRepository.save(bookMapper.toBook(bookDTO));
+    public BookDTO save(BookDTO bookDTO) {
+        return bookMapper.toBookDTO(bookRepository.save(bookMapper.toBook(bookDTO)));
     }
 
     @Override
@@ -47,8 +44,8 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<BookDTO> findAllByPublishers_Name(String name) {
-        return bookMapper.toBookDTOList(bookRepository.findAllByPublishers_Name(name));
+    public List<BookDTO> findAllByPublisher_Name(String name) {
+        return bookMapper.toBookDTOList(bookRepository.findAllByPublisher_Name(name));
     }
 
 

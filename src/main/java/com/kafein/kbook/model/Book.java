@@ -31,16 +31,10 @@ public class Book implements Serializable {
     private Author author;
 
 
-    @ManyToMany
-    @JoinTable(name = "publisher_books",
-            joinColumns = @JoinColumn(name = "books_id", referencedColumnName = "id", insertable = false, updatable = false),
-            inverseJoinColumns = @JoinColumn(name = "publishers_id", referencedColumnName = "id", insertable = false, updatable = false))
-    private Set<Publisher> publishers;
+    @ManyToOne
+    private Publisher publisher;
 
-    private boolean status;
-
-    @ManyToOne(cascade = {CascadeType.MERGE})
-    @JoinColumn(name="loan_id")
-    private Loan loan;
+    @ManyToMany(mappedBy = "books")
+    private Set<Loan> loans;
 
 }

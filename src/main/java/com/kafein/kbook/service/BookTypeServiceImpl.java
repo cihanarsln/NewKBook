@@ -3,7 +3,6 @@ package com.kafein.kbook.service;
 import com.kafein.kbook.service.base.BookTypeService;
 import com.kafein.kbook.dto.BookTypeDTO;
 import com.kafein.kbook.mapper.BookTypeMapper;
-import com.kafein.kbook.model.BookType;
 import com.kafein.kbook.repository.BookTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,9 +19,8 @@ public class BookTypeServiceImpl implements BookTypeService {
     private BookTypeMapper bookTypeMapper;
 
     @Override
-    public BookType save(BookTypeDTO bookTypeDTO) {
-        //BookType bookType = bookTypeMapper.toBookType(bookTypeDTO);
-        return bookTypeRepository.save(bookTypeMapper.toBookType(bookTypeDTO));
+    public BookTypeDTO save(BookTypeDTO bookTypeDTO) {
+        return bookTypeMapper.toBookTypeDTO(bookTypeRepository.save(bookTypeMapper.toBookType(bookTypeDTO)));
     }
 
     @Override

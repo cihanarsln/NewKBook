@@ -2,7 +2,6 @@ package com.kafein.kbook.controller;
 
 import com.kafein.kbook.service.base.BookTypeService;
 import com.kafein.kbook.dto.BookTypeDTO;
-import com.kafein.kbook.model.BookType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +22,7 @@ public class BookTypeController {
 
     @PostMapping
     @ResponseBody
-    public BookType save(@RequestBody BookTypeDTO bookType){
+    public BookTypeDTO save(@RequestBody BookTypeDTO bookType){
         return bookTypeService.save(bookType);
     }
 

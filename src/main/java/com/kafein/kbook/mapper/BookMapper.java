@@ -4,7 +4,6 @@ import com.kafein.kbook.dto.BookDTO;
 import com.kafein.kbook.model.Book;
 import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 
 import java.util.List;
@@ -16,7 +15,6 @@ public interface BookMapper {
     Book toBook(BookDTO bookDTO);
 
     @Named("toBookDTO")
-    @Mapping(target = "publishers", ignore = true)
     BookDTO toBookDTO(Book book);
 
     @IterableMapping(qualifiedByName = "toBook")

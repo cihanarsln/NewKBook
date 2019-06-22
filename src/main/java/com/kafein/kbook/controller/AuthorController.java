@@ -2,7 +2,6 @@ package com.kafein.kbook.controller;
 
 import com.kafein.kbook.dto.AuthorDTO;
 import com.kafein.kbook.service.base.AuthorService;
-import com.kafein.kbook.model.Author;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +22,7 @@ public class AuthorController {
 
     @PostMapping(path = "/authors")
     @ResponseBody
-    public Author save(@RequestBody AuthorDTO author){
+    public AuthorDTO save(@RequestBody AuthorDTO author){
         return authorService.save(author);
     }
 

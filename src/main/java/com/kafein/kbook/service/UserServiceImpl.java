@@ -3,7 +3,6 @@ package com.kafein.kbook.service;
 import com.kafein.kbook.dto.UserDTO;
 import com.kafein.kbook.mapper.UserMapper;
 import com.kafein.kbook.service.base.UserService;
-import com.kafein.kbook.model.User;
 import com.kafein.kbook.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,8 +19,8 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public User save(UserDTO userDTO) {
-        return userRepository.save(userMapper.toUser(userDTO));
+    public UserDTO save(UserDTO userDTO) {
+        return userMapper.toUserDTO(userRepository.save(userMapper.toUser(userDTO)));
     }
 
     @Override

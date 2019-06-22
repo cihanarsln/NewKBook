@@ -4,7 +4,6 @@ import com.kafein.kbook.dto.LoanDTO;
 import com.kafein.kbook.model.Loan;
 import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 
 import java.util.List;
@@ -16,7 +15,6 @@ public interface LoanMapper {
     Loan toLoan(LoanDTO loanDTO);
 
     @Named("toLoanDTO")
-    @Mapping(target = "books", ignore = true)
     LoanDTO toLoanDTO(Loan loan);
 
     @IterableMapping(qualifiedByName = "toLoan")

@@ -2,14 +2,14 @@ package com.kafein.kbook.service;
 
 import com.kafein.kbook.dto.LoanDTO;
 import com.kafein.kbook.mapper.LoanMapper;
-import com.kafein.kbook.model.Book;
-import com.kafein.kbook.model.Loan;
+import com.kafein.kbook.model.User;
 import com.kafein.kbook.repository.LoanRepository;
+import com.kafein.kbook.repository.UserRepository;
 import com.kafein.kbook.service.base.LoanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -19,21 +19,18 @@ public class LoanServiceImpl implements LoanService {
     private LoanRepository loanRepository;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private LoanMapper loanMapper;
 
 
     @Override
     public LoanDTO save(LoanDTO loanDTO) {
-        Loan loan = loanMapper.toLoan(loanDTO);
-        for (Book book:loan.getBooks()) {
-            book.setStatus(false);
-        }
-        //for (Book book:books){
-        //    book.setLoan(loan);
-        //}
-        //loan.getBook().setStatus(false);
-        for (Book book : loan.getBooks()){
-            book.setLoan(loan);
+        for (User user: userRepository.findAll()){
+            if (((User)(((ArrayList)loanDTO.getUsers()).get(0))).getId().equalsIgnoreCase(user.getId())){
+                return null;
+            }
         }
         return loanMapper.toLoanDTO(loanRepository.save(loanMapper.toLoan(loanDTO)));
     }

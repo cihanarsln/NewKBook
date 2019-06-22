@@ -2,9 +2,9 @@ package com.kafein.kbook.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Data
 @Entity
@@ -22,5 +22,8 @@ public class User {
     private String address;
 
     private Date bdate;
+
+    @ManyToMany(mappedBy = "users")
+    private Set<Loan> loans;
 
 }

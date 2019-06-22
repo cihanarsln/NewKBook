@@ -23,7 +23,7 @@ public class BookController {
 
     @PostMapping
     @ResponseBody
-    public Book save(@RequestBody  BookDTO book){
+    public BookDTO save(@RequestBody  BookDTO book){
         return bookService.save(book);
     }
 
@@ -49,7 +49,7 @@ public class BookController {
     @PostMapping("/by-publisher-name")
     @ResponseBody
     public List<BookDTO> getAllByPublisher_Name(@RequestParam("name") String name){
-        return bookService.findAllByPublishers_Name(name);
+        return bookService.findAllByPublisher_Name(name);
     }
 
     @PostMapping("/by-type")

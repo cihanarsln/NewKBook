@@ -23,10 +23,8 @@ public class BookDTO {
 
     private AuthorDTO author;
 
-    private Set<PublisherDTO> publishers;
+    private PublisherDTO publisher;
 
-    private boolean status;
-
-    private LoanDTO loan;
+    private Set<LoanDTO> loans;
 
 }

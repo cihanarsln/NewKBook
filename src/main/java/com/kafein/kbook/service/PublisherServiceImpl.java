@@ -3,7 +3,6 @@ package com.kafein.kbook.service;
 import com.kafein.kbook.dto.PublisherDTO;
 import com.kafein.kbook.mapper.PublisherMapper;
 import com.kafein.kbook.service.base.PublisherService;
-import com.kafein.kbook.model.Publisher;
 import com.kafein.kbook.repository.PublisherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,8 +19,8 @@ public class PublisherServiceImpl implements PublisherService {
     private PublisherMapper publisherMapper;
 
     @Override
-    public Publisher save(PublisherDTO publisherDTO) {
-        return publisherRepository.save(publisherMapper.toPublisher(publisherDTO));
+    public PublisherDTO save(PublisherDTO publisherDTO) {
+        return publisherMapper.toPublisherDTO(publisherRepository.save(publisherMapper.toPublisher(publisherDTO)));
     }
 
     @Override

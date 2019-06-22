@@ -15,6 +15,4 @@ public class PublisherDTO {
 
     private String phone;
 
-    private Set<BookDTO> books;
-
 }

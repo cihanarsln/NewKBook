@@ -13,7 +13,7 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
 
     List<Book> findAllByAuthor_FnameAndAuthor_Lname(String author_fname, String author_lname);
 
-    List<Book> findAllByPublishers_Name(String name);
+    List<Book> findAllByPublisher_Name(String name);
 
     List<Book> findAllByType_Name(String name);
 

@@ -3,6 +3,7 @@ package com.kafein.kbook.dto;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.Set;
 
 @Data
 public class UserDTO {
@@ -18,5 +19,7 @@ public class UserDTO {
     private String address;
 
     private Date bdate;
+
+    private Set<LoanDTO> loans;
 
 }
