@@ -4,11 +4,12 @@ import com.kafein.kbook.dto.UserDTO;
 import com.kafein.kbook.model.User;
 import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {LoanMapper.class})
 public interface UserMapper {
 
     @Named("toUser")

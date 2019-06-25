@@ -12,4 +12,8 @@ public interface LoanService {
 
     List<LoanDTO> findAll();
 
+    void deleteAllById(int id);
+
+    LoanDTO findById(int id);
+
 }

@@ -23,18 +23,22 @@ public class Book implements Serializable {
 
     private String isbn;
 
-    private boolean hardcover;
+    private Boolean hardcover;
 
     private int nop;
 
     @ManyToOne
     private Author author;
 
+    private Boolean status;
 
     @ManyToOne
     private Publisher publisher;
 
-    @ManyToMany(mappedBy = "books")
-    private Set<Loan> loans;
+    //@ManyToOne
+    //"private Loan loan;
+
+    /*@ManyToMany(mappedBy = "books")
+    private Set<Loan> loans;*/
 
 }

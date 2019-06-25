@@ -26,4 +26,16 @@ public class LoanController {
         return loanService.save(loanDTO);
     }
 
+    @PostMapping("/delete-by-id")
+    @ResponseBody
+    public void deleteAllById(@RequestParam("id") int id){
+        loanService.deleteAllById(id);
+    }
+
+    @PostMapping("/by-id")
+    @ResponseBody
+    public LoanDTO finAllById(@RequestParam("id") int id){
+        return loanService.findById(id);
+    }
+
 }

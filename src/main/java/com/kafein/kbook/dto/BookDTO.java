@@ -17,7 +17,9 @@ public class BookDTO {
 
     private String isbn;
 
-    private boolean hardcover;
+    private Boolean hardcover;
+
+    private Boolean status;
 
     private int nop;
 
@@ -25,6 +27,8 @@ public class BookDTO {
 
     private PublisherDTO publisher;
 
-    private Set<LoanDTO> loans;
+    private LoanDTO loan;
+
+    //private Set<LoanDTO> loans;
 
 }

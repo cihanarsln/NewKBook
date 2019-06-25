@@ -20,6 +20,6 @@ public class UserDTO {
 
     private Date bdate;
 
-    private Set<LoanDTO> loans;
+    private LoanDTO loan;
 
 }

@@ -23,7 +23,10 @@ public class User {
 
     private Date bdate;
 
-    @ManyToMany(mappedBy = "users")
-    private Set<Loan> loans;
+    //@OneToOne
+    //private Loan loan;
+
+    /*@ManyToMany(mappedBy = "users")
+    private Set<Loan> loans;*/
 
 }

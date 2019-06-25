@@ -8,7 +8,7 @@ import org.mapstruct.Named;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", uses = {BookMapper.class})
+@Mapper(componentModel = "spring")
 public interface PublisherMapper {
 
     @Named("toPublisher")
