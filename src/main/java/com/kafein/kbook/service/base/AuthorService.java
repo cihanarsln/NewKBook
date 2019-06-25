@@ -12,4 +12,12 @@ public interface AuthorService {
 
     List<AuthorDTO> findAll();
 
+    AuthorDTO findById(int id);
+
+    List<AuthorDTO> findAllByFname(String fname);
+
+    List<AuthorDTO> findAllByLname(String lname);
+
+    List<AuthorDTO> findAllByFnameAndLname(String fname, String lname);
+
 }

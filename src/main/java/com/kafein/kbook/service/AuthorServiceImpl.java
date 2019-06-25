@@ -28,4 +28,24 @@ public class AuthorServiceImpl implements AuthorService {
         return authorMapper.toAuthorDTOList(authorRepository.findAll());
     }
 
+    @Override
+    public AuthorDTO findById(int id) {
+        return authorMapper.toAuthorDTO(authorRepository.findById(id));
+    }
+
+    @Override
+    public List<AuthorDTO> findAllByFname(String fname) {
+        return authorMapper.toAuthorDTOList(authorRepository.findAllByFname(fname));
+    }
+
+    @Override
+    public List<AuthorDTO> findAllByLname(String lname) {
+        return authorMapper.toAuthorDTOList(authorRepository.findAllByLname(lname));
+    }
+
+    @Override
+    public List<AuthorDTO> findAllByFnameAndLname(String fname, String lname) {
+        return authorMapper.toAuthorDTOList(authorRepository.findAllByFnameAndLname(fname, lname));
+    }
+
 }

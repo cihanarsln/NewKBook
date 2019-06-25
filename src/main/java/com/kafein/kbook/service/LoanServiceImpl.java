@@ -10,6 +10,7 @@ import com.kafein.kbook.repository.LoanRepository;
 import com.kafein.kbook.repository.UserRepository;
 import com.kafein.kbook.service.base.LoanService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -111,6 +112,11 @@ public class LoanServiceImpl implements LoanService {
             theBooks.add(theBook);
         }
         bookRepository.saveAll(theBooks);
+    }
+
+    @Scheduled(cron = "0 30 11 * * ?")
+    public void mailToUser(){
+        System.out.println("---------------------dasdasdasdasdasd--------------");
     }
 
 }
