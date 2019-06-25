@@ -9,14 +9,11 @@ import com.kafein.kbook.repository.BookRepository;
 import com.kafein.kbook.repository.LoanRepository;
 import com.kafein.kbook.repository.UserRepository;
 import com.kafein.kbook.service.base.LoanService;
-import org.assertj.core.util.Sets;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class LoanServiceImpl implements LoanService {
@@ -37,22 +34,13 @@ public class LoanServiceImpl implements LoanService {
     public LoanDTO save(LoanDTO loanDTO) {
 
         Loan loan = loanMapper.toLoan(loanDTO);
-        User theUser = loan.getUsers().iterator().next();
-        Set<Book> selectableBooks = getSelectableBooks(loan.getBooks());
+        User theUser = loan.getUser();
+        Set<Book> theBooks = getBooks(loan.getBooks());
+        User user1 = saveUser(theUser);
+        loan.setBooks(theBooks);
+        loan.setMaxDate(calculateUsaageTime(theBooks, loan.getPickDate()));
+        return loanMapper.toLoanDTO(loanRepository.save(loan));
 
-        for (User user : userRepository.findAll()){
-            if (user.getId().equalsIgnoreCase(theUser.getId())){
-                if(selectableBooks.size()>0){
-                    loan.setBooks(selectableBooks);
-                    loanRepository.save(loan);
-                    return loanMapper.toLoanDTO(loan);
-                }
-            }
-        }
-        userRepository.save(theUser);
-        loan.setBooks(selectableBooks);
-        return loanMapper.toLoanDTO(loan);
-       // return loanMapper.toLoanDTO(loanRepository.save(loanMapper.toLoan(loanDTO)));
     }
 
     @Override
@@ -71,17 +59,58 @@ public class LoanServiceImpl implements LoanService {
         return loanMapper.toLoanDTO(loanRepository.findById(id));
     }
 
-    private Set<Book> getSelectableBooks(Set<Book> books){
-        Set<Book> selectableBooks = new HashSet<>();
+    @Override
+    public List<LoanDTO> findAllByUser_Id(String id) {
+        return loanMapper.toLoanDTOList(loanRepository.findAllByUser_Id(id));
+    }
+
+    @Override
+    public LoanDTO deliver(int id) {
+        Loan loan = loanRepository.findById(id);
+        loan.setDeliveryDate(new Date());
+        deliverBooks(loan.getBooks());
+        return loanMapper.toLoanDTO(loanRepository.save(loan));
+    }
+
+    private Set<Book> getBooks(Set<Book> books){
+        Set<Book> theBooks = new HashSet<>();
         for (Book book : books) {
             Book theBook = bookRepository.findById(book.getId());
             if (theBook.getStatus()){
                 theBook.setStatus(false);
-                selectableBooks.add(theBook);
+                theBooks.add(theBook);
             }
         }
-        bookRepository.saveAll(selectableBooks);
-        return selectableBooks;
+        bookRepository.saveAll(theBooks);
+        return theBooks;
+    }
+
+    private User saveUser(User theUser){
+        for (User user : userRepository.findAll()){
+            if (user.getId().equalsIgnoreCase(theUser.getId())){
+                return theUser;
+            }
+        }
+        return userRepository.save(theUser);
+    }
+
+    private Date calculateUsaageTime(Set<Book> books, Date date){
+        int totalPages = 0;
+        for (Book book : books) totalPages += book.getNop();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.DATE, totalPages/50);
+        return calendar.getTime();
+    }
+
+    private void deliverBooks(Set<Book> books){
+        Set<Book> theBooks = new HashSet<>();
+        for (Book book : books){
+            Book theBook = bookRepository.findById(book.getId());
+            theBook.setStatus(true);
+            theBooks.add(theBook);
+        }
+        bookRepository.saveAll(theBooks);
     }
 
 }

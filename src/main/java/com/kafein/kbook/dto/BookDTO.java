@@ -2,8 +2,6 @@ package com.kafein.kbook.dto;
 
 import lombok.Data;
 
-import java.util.Set;
-
 @Data
 public class BookDTO {
 
@@ -26,9 +24,5 @@ public class BookDTO {
     private AuthorDTO author;
 
     private PublisherDTO publisher;
-
-    private LoanDTO loan;
-
-    //private Set<LoanDTO> loans;
 
 }

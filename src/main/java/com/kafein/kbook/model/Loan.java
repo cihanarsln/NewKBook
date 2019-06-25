@@ -15,26 +15,8 @@ public class Loan implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    //@OneToMany
-    //private Set<Book> books;
-
-    //@OneToOne
-    //private User user;
-
-    /*@ManyToMany
-    @JoinTable(name = "loan_books",
-            joinColumns = @JoinColumn(name = "loan_id", referencedColumnName = "id", insertable = false, updatable = false),
-            inverseJoinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id", insertable = false, updatable = false))
-    private Set<Book> books;*/
-
-    /*@ManyToMany
-    @JoinTable(name = "loan_users",
-            joinColumns = @JoinColumn(name = "loan_id", referencedColumnName = "id", insertable = false, updatable = false),
-            inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false, updatable = false))
-    private Set<User> users;*/
-
-    @ManyToMany
-    private Set<User> users;
+    @ManyToOne
+    private User user;
 
     @ManyToMany
     private Set<Book> books;
@@ -42,5 +24,7 @@ public class Loan implements Serializable {
     private Date pickDate;
 
     private Date deliveryDate;
+
+    private Date maxDate;
 
 }

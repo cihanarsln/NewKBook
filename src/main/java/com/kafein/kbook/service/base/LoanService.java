@@ -16,4 +16,8 @@ public interface LoanService {
 
     LoanDTO findById(int id);
 
+    List<LoanDTO> findAllByUser_Id(String id);
+
+    LoanDTO deliver(int id);
+
 }

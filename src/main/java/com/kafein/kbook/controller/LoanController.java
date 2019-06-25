@@ -38,4 +38,12 @@ public class LoanController {
         return loanService.findById(id);
     }
 
+    @PostMapping("/by-user-id")
+    @ResponseBody
+    public List<LoanDTO> findAllByUser_Id(@RequestParam("id") String id) { return loanService.findAllByUser_Id(id);}
+
+    @PostMapping("/delivery")
+    @ResponseBody
+    public LoanDTO deliver(@RequestParam("id") int id){return loanService.deliver(id);}
+
 }

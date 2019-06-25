@@ -4,7 +4,6 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.Set;
 
 @Data
 @Entity
@@ -22,11 +21,5 @@ public class User {
     private String address;
 
     private Date bdate;
-
-    //@OneToOne
-    //private Loan loan;
-
-    /*@ManyToMany(mappedBy = "users")
-    private Set<Loan> loans;*/
 
 }

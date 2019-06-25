@@ -13,10 +13,12 @@ public class LoanDTO implements Serializable {
 
     private Set<BookDTO> books;
 
-    private Set<UserDTO> users;
+    private UserDTO user;
 
     private Date pickDate;
 
     private Date deliveryDate;
+
+    private Date maxDate;
 
 }

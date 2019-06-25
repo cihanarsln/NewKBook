@@ -4,7 +4,6 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Set;
 
 @Data
 @Entity
@@ -34,11 +33,5 @@ public class Book implements Serializable {
 
     @ManyToOne
     private Publisher publisher;
-
-    //@ManyToOne
-    //"private Loan loan;
-
-    /*@ManyToMany(mappedBy = "books")
-    private Set<Loan> loans;*/
 
 }
