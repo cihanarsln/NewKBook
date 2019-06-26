@@ -20,11 +20,18 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public AdminDTO save(AdminDTO admin) {
-        return null;
+        return adminMapper.toAdminDTO(adminRepository.save(adminMapper.toAdmin(admin)));
     }
 
     @Override
     public List<AdminDTO> findAll() {
-        return null;
+        return adminMapper.toAdminDTOList(adminRepository.findAll());
     }
+
+    @Override
+    public void deleteById(int id) {
+        adminRepository.deleteById(id);
+    }
+
+
 }

@@ -12,4 +12,6 @@ public interface AdminService {
 
     List<AdminDTO> findAll();
 
+    void deleteById(int id);
+
 }

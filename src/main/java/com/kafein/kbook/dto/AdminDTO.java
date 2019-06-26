@@ -1,5 +1,8 @@
 package com.kafein.kbook.dto;
 
+import lombok.Data;
+
+@Data
 public class AdminDTO {
 
     private int id;
