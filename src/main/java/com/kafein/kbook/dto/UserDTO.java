@@ -19,4 +19,6 @@ public class UserDTO {
 
     private Date bdate;
 
+    private String mail;
+
 }
