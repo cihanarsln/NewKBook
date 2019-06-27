@@ -7,20 +7,20 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/kbook")
+@RequestMapping("/kbook/users")
 @RestController
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @GetMapping("/users")
+    @GetMapping
     @ResponseBody
     public List<UserDTO> getAll(){
         return userService.findAll();
     }
 
-    @PostMapping("/users")
+    @PostMapping
     @ResponseBody
     public UserDTO save(@RequestBody UserDTO user){
         return userService.save(user);
