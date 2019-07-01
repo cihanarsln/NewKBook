@@ -2,8 +2,6 @@ package com.kafein.kbook.dto;
 
 import lombok.Data;
 
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
 import java.util.Date;
 import java.util.Set;
 
@@ -20,8 +18,6 @@ public class UserDTO {
 
     private String password;
 
-    private Set<RoleDTO> roles;
-
     private String phone;
 
     private String address;
@@ -29,5 +25,9 @@ public class UserDTO {
     private Date bdate;
 
     private String mail;
+
+    private Boolean enabled;
+
+    private Set<RoleDTO> roles;
 
 }

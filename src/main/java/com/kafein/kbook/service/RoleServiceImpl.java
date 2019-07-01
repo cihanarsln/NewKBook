@@ -27,4 +27,9 @@ public class RoleServiceImpl implements RoleService {
     public List<RoleDTO> findAll() {
         return roleMapper.toRoleDTOList(roleRepository.findAll());
     }
+
+    @Override
+    public RoleDTO findByRole(String role) {
+        return roleMapper.toRoleDTO(roleRepository.findByRole(role));
+    }
 }

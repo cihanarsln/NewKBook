@@ -22,6 +22,10 @@ public class RoleController {
     @ResponseBody
     public List<RoleDTO> findAll(){return roleService.findAll();}
 
-
+    @PostMapping("/by-role")
+    @ResponseBody
+    public RoleDTO finByRole(@RequestParam("role") String role){
+        return roleService.findByRole(role);
+    }
 
 }

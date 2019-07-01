@@ -12,4 +12,6 @@ public interface RoleService {
 
     List<RoleDTO> findAll();
 
+    RoleDTO findByRole(String role);
+
 }

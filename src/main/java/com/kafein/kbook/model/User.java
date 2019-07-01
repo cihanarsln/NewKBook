@@ -1,18 +1,14 @@
 package com.kafein.kbook.model;
 
 import lombok.Data;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.Date;
-import java.util.Set;
+import java.util.*;
 
 @Data
 @Entity
-public class User implements UserDetails, Serializable {
+public class User implements Serializable {
 
     @Id
     private String id;
@@ -25,9 +21,6 @@ public class User implements UserDetails, Serializable {
 
     private String password;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    private Set<Role> roles;
-
     private String phone;
 
     private String address;
@@ -36,28 +29,9 @@ public class User implements UserDetails, Serializable {
 
     private String mail;
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
+    private Boolean enabled;
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return false;
-    }
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Role> roles;
 
-    @Override
-    public boolean isAccountNonLocked() {
-        return false;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return false;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return false;
-    }
 }
