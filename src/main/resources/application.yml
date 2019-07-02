@@ -9,8 +9,3 @@ spring:
     generate-ddl: true
     hibernate:
       ddl-auto: update
-  jwt:
-    clientId: cliendtid
-    client-server: secret
-    accessTokenValidititySeconds: 120
-    refreshTokenValiditySeconds: 1000
