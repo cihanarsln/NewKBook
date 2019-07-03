@@ -15,8 +15,8 @@ import java.util.function.Function;
 @Component
 public class JwtTokenUtil {
 
-    // 1Gün
-    public static final long ACCESS_TOKEN_VALIDITY_SECONDS = 24 * 60 * 60 * 1000;
+    // 1 hour
+    public static final long ACCESS_TOKEN_VALIDITY_SECONDS = 60 * 60 * 1000;
     public static final String SIGNING_KEY = "temelt";
 
     public String getUsernameFromToken(String token) {
@@ -52,6 +52,7 @@ public class JwtTokenUtil {
 
         Claims claims = Jwts.claims().setSubject(subject);
         claims.put("scopes", Arrays.asList(new SimpleGrantedAuthority("USER")));
+
 
         return Jwts.builder()
                 .setClaims(claims)
