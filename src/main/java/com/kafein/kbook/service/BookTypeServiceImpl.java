@@ -25,7 +25,6 @@ public class BookTypeServiceImpl implements BookTypeService {
 
     @Override
     public List<BookTypeDTO> findAll() {
-        //List<BookType> bookTypes = bookTypeRepository.findAll();
         return bookTypeMapper.toBookTypeDTOList(bookTypeRepository.findAll());
     }
 
