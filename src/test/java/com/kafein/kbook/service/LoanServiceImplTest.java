@@ -1,12 +1,9 @@
 package com.kafein.kbook.service;
 
-import com.kafein.kbook.dto.BookDTO;
 import com.kafein.kbook.dto.LoanDTO;
 import com.kafein.kbook.dto.UserDTO;
 import com.kafein.kbook.mapper.LoanMapper;
-import com.kafein.kbook.model.Book;
 import com.kafein.kbook.model.Loan;
-import com.kafein.kbook.model.User;
 import com.kafein.kbook.repository.BookRepository;
 import com.kafein.kbook.repository.LoanRepository;
 import com.kafein.kbook.repository.UserRepository;
@@ -17,11 +14,13 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.*;
+import java.util.stream.Stream;
 
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -50,28 +49,45 @@ public class LoanServiceImplTest {
 
     @Test
     public void findAllTest(){
-        when(loanMapper.toLoanDTOList(loanRepository.findAll())).thenReturn(createLoanList());
-        Assert.assertEquals(loanServiceImpl.findAll(), createLoanList());
+        when(loanMapper.toLoanDTOList(loanRepository.findAll())).thenReturn(createLoanDTOList());
+        Assert.assertEquals(loanServiceImpl.findAll(), createLoanDTOList());
     }
 
-    public List<LoanDTO> createLoanList(){
-        UserDTO user = new UserDTO();
-        user.setId("1");
-        BookDTO book = new BookDTO();
-        book.setId(1);
-        Set<BookDTO> books = new HashSet<>();
-        books.add(book);
-        LoanDTO loan = new LoanDTO();
-        loan.setId(1);
-        loan.setUser(user);
-        loan.setBooks(books);
-        loan.setDeliveryDate(new Date(2000,10,10));
-        loan.setMaxDate(new Date(2000,10,10));
-        loan.setPickDate(new Date(2000,10,10));
-        List<LoanDTO> loans = new ArrayList<>();
-        loans.add(loan);
-        return loans;
+
+    @Test
+    public void findByIdTest(){
+        when(loanMapper.toLoanDTO(loanRepository.findById(anyInt()))).thenReturn(createLoanDTO());
+        Assert.assertEquals(1,loanServiceImpl.findById(anyInt()).getId());
     }
+
+    @Test
+    public void findAllByUser_IdTest(){
+        when(loanMapper.toLoanDTOList(loanRepository.findAllByUser_Id(anyString()))).thenReturn(createLoanDTOList());
+        Assert.assertEquals(1, loanServiceImpl.findAllByUser_Id(anyString()).size());
+    }
+
+    private LoanDTO createLoanDTO() {
+        LoanDTO loanDTO = new LoanDTO();
+        loanDTO.setId(1);
+        return loanDTO;
+    }
+
+    public List<LoanDTO> createLoanDTOList(){
+        List<LoanDTO> loanDTOs = new ArrayList<>();
+        loanDTOs.add(createLoanDTO());
+        return loanDTOs;
+    }
+
+    public List<LoanDTO> createLoanDTOListWithOnlyUser(){
+        List<LoanDTO> loanDTOs = new ArrayList<>();
+        LoanDTO loanDTO = new LoanDTO();
+        UserDTO userDTO = new UserDTO();
+        userDTO.setId("1");
+        loanDTO.setUser(userDTO);
+        loanDTOs.add(createLoanDTO());
+        return loanDTOs;
+    }
+
 
 
 

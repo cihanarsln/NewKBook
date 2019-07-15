@@ -31,14 +31,17 @@ public class LoanServiceImpl implements LoanService {
     private UserRepository userRepository;
 
     @Override
+    @Transactional
     public LoanDTO save(LoanDTO loanDTO) {
 
         Loan loan = loanMapper.toLoan(loanDTO);
         User theUser = loan.getUser();
-        Set<Book> theBooks = getBooks(loan.getBooks());
-        User user1 = saveUser(theUser);
+        Set<Book> theBooks = checkBooks(loan.getBooks());
+        loan.setBooks(theBooks);
+        saveUser(theUser);
         loan.setBooks(theBooks);
         loan.setMaxDate(calculateUsaageTime(theBooks, loan.getPickDate()));
+        bookRepository.saveAll(theBooks);
         return loanMapper.toLoanDTO(loanRepository.save(loan));
 
     }
@@ -72,7 +75,7 @@ public class LoanServiceImpl implements LoanService {
         return loanMapper.toLoanDTO(loanRepository.save(loan));
     }
 
-    private Set<Book> getBooks(Set<Book> books){
+    private Set<Book> checkBooks(Set<Book> books){
         Set<Book> theBooks = new HashSet<>();
         for (Book book : books) {
             Book theBook = bookRepository.findById(book.getId());
@@ -81,7 +84,7 @@ public class LoanServiceImpl implements LoanService {
                 theBooks.add(theBook);
             }
         }
-        bookRepository.saveAll(theBooks);
+//      bookRepository.saveAll(theBooks);
         return theBooks;
     }
 

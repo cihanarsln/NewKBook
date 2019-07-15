@@ -2,17 +2,14 @@ package com.kafein.kbook.controller;
 
 import com.kafein.kbook.dto.LoginRequest;
 import com.kafein.kbook.dto.TokenResponse;
-import com.kafein.kbook.dto.UserDTO;
 import com.kafein.kbook.model.User;
 import com.kafein.kbook.repository.UserRepository;
 import com.kafein.kbook.security.JwtTokenUtil;
-import com.kafein.kbook.service.base.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/kbook/token")
@@ -28,7 +25,7 @@ public class TokenController {
     @Autowired
     private UserRepository userService;
 
-    @PostMapping
+    @GetMapping
     @ResponseBody
     public ResponseEntity<TokenResponse> getToken(@RequestBody LoginRequest request) throws AuthenticationServiceException{
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
